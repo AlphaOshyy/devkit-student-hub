@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DevKit Student Hub, a free browser toolkit for software engineering students.">
+<title>DevKit Student Hub</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="logo" href="#top">DEV<span>KIT</span></a>
+    <nav>
+      <a href="#tools">Tools</a><a href="#resources">Resources</a><a href="#about">About</a>
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">☾</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">FREE • FAST • LOCAL</p>
+      <h1>Your small toolkit for <span>better code.</span></h1>
+      <p class="hero-copy">Useful developer tools for students. No account, no database, no paid API.</p>
+      <a class="btn" href="#tools">Explore tools</a>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar"><i></i><i></i><i></i><span>devkit.js</span></div>
+      <pre><code>const toolkit = {
+  format: "JSON",
+  colors: "HEX / RGB",
+  units: "PX / REM / MB",
+  notes: "localStorage"
+};
+
+console.log("Build. Learn. Ship.");</code></pre>
+    </div>
+  </div>
+</section>
+
+<section id="tools" class="section">
+<div class="container">
+  <div class="section-head"><p class="eyebrow">TOOLS</p><h2>Built for everyday development.</h2></div>
+  <div class="tool-grid">
+    <article class="card">
+      <div class="card-top"><span class="tool-number">01</span><h3>JSON Formatter</h3></div>
+      <textarea id="jsonInput" placeholder='Paste JSON here, e.g. {"name":"Nova","student":true}'></textarea>
+      <div class="actions"><button class="btn small" id="formatJson">Format</button><button class="btn ghost small" id="copyJson">Copy</button></div>
+      <pre id="jsonOutput" class="output">Formatted JSON appears here.</pre>
+    </article>
+
+    <article class="card">
+      <div class="card-top"><span class="tool-number">02</span><h3>Color Lab</h3></div>
+      <div class="color-row"><input id="colorInput" type="color" value="#ff334f"><div id="colorPreview"></div></div>
+      <div class="value-row"><label>HEX<input id="hexValue" readonly></label><label>RGB<input id="rgbValue" readonly></label></div>
+      <button class="btn small" id="copyHex">Copy HEX</button>
+    </article>
+
+    <article class="card">
+      <div class="card-top"><span class="tool-number">03</span><h3>Unit Converter</h3></div>
+      <input id="unitInput" type="number" placeholder="Enter value">
+      <select id="unitType">
+        <option value="px-rem">PX → REM</option><option value="rem-px">REM → PX</option>
+        <option value="kb-mb">KB → MB</option><option value="mb-gb">MB → GB</option>
+      </select>
+      <div id="unitResult" class="result">Result appears here.</div>
+    </article>
+
+    <article class="card">
+      <div class="card-top"><span class="tool-number">04</span><h3>Quick Notes</h3></div>
+      <textarea id="notesInput" placeholder="Save a small study note in this browser..."></textarea>
+      <div class="actions"><button class="btn small" id="saveNotes">Save locally</button><button class="btn ghost small" id="clearNotes">Clear</button></div>
+      <p id="noteStatus" class="status">Nothing saved yet.</p>
+    </article>
+  </div>
+</div>
+</section>
+
+<section id="resources" class="section resources">
+<div class="container">
+  <div class="section-head"><p class="eyebrow">RESOURCES</p><h2>Keep learning.</h2></div>
+  <div class="resource-grid">
+    <a href="https://docs.github.com/" target="_blank" rel="noopener"><strong>GitHub Docs</strong><span>Git, repositories and collaboration</span></a>
+    <a href="https://developer.mozilla.org/" target="_blank" rel="noopener"><strong>MDN Web Docs</strong><span>Web development reference</span></a>
+    <a href="https://roadmap.sh/" target="_blank" rel="noopener"><strong>roadmap.sh</strong><span>Developer learning roadmaps</span></a>
+    <a href="https://www.postman.com/" target="_blank" rel="noopener"><strong>Postman</strong><span>API testing and development</span></a>
+  </div>
+</div>
+</section>
+
+<section id="about" class="section about">
+<div class="container about-box">
+  <div><p class="eyebrow">ABOUT</p><h2>Simple by design.</h2></div>
+  <p>DevKit Student Hub runs in your browser using plain HTML, CSS and JavaScript. There is no login, server, database or paid service. Host it free with GitHub Pages.</p>
+</div>
+</section>
+</main>
+
+<footer><div class="container"><strong>DEVKIT STUDENT HUB</strong><span>Built with HTML • CSS • JavaScript</span></div></footer>
+<script src="script.js"></script>
+</body>
+</html>
