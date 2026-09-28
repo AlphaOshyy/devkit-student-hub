@@ -1,105 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="DevKit Student Hub, a free browser toolkit for software engineering students.">
-<title>DevKit Student Hub</title>
-<link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#090a0c"><title>DevKit Student Hub</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">
-  <div class="container nav">
-    <a class="logo" href="#top">DEV<span>KIT</span></a>
-    <nav>
-      <a href="#tools">Tools</a><a href="#resources">Resources</a><a href="#about">About</a>
-      <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">☾</button>
-    </nav>
-  </div>
-</header>
-
+<header class="site-header"><div class="container nav">
+<a class="logo" href="#top">DEV<span>KIT</span></a>
+<nav><a href="#tools">Tools</a><a href="#resources">Resources</a><a href="#about">About</a><button id="themeToggle" class="icon-btn" aria-label="Toggle theme">☾</button><button id="commandBtn" class="command-btn" aria-label="Open command palette">⌘ K</button></nav>
+</div></header>
 <main id="top">
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <p class="eyebrow">FREE • FAST • LOCAL</p>
-      <h1>Your small toolkit for <span>better code.</span></h1>
-      <p class="hero-copy">Useful developer tools for students. No account, no database, no paid API.</p>
-      <a class="btn" href="#tools">Explore tools</a>
-    </div>
-    <div class="terminal">
-      <div class="terminal-bar"><i></i><i></i><i></i><span>devkit.js</span></div>
-      <pre><code>const toolkit = {
+<section class="hero"><div class="container hero-grid"><div>
+<p class="eyebrow">FREE • FAST • LOCAL</p><h1>Your small toolkit for <span>better code.</span></h1>
+<p class="hero-copy">A polished collection of everyday developer tools for students. Everything runs locally in your browser.</p>
+<div class="hero-actions"><a class="btn" href="#tools">Explore tools</a><button class="btn ghost" id="randomTool">Surprise me</button></div>
+<div class="mini-stats"><span><b id="toolCount">08</b> tools</span><span><b>0</b> logins</span><span><b>0</b> paid APIs</span></div>
+</div>
+<div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>devkit.js</span><b>● local</b></div><pre><code>const toolkit = {
   format: "JSON",
   colors: "HEX / RGB",
+  encode: "Base64",
   units: "PX / REM / MB",
+  time: "Timestamp",
   notes: "localStorage"
 };
 
-console.log("Build. Learn. Ship.");</code></pre>
-    </div>
-  </div>
-</section>
+console.log("Build. Learn. Ship.");</code></pre></div></div></section>
 
-<section id="tools" class="section">
-<div class="container">
-  <div class="section-head"><p class="eyebrow">TOOLS</p><h2>Built for everyday development.</h2></div>
-  <div class="tool-grid">
-    <article class="card">
-      <div class="card-top"><span class="tool-number">01</span><h3>JSON Formatter</h3></div>
-      <textarea id="jsonInput" placeholder='Paste JSON here, e.g. {"name":"Nova","student":true}'></textarea>
-      <div class="actions"><button class="btn small" id="formatJson">Format</button><button class="btn ghost small" id="copyJson">Copy</button></div>
-      <pre id="jsonOutput" class="output">Formatted JSON appears here.</pre>
-    </article>
+<section id="tools" class="section"><div class="container">
+<div class="section-head"><p class="eyebrow">TOOLS</p><h2>Small tools. Big time savings.</h2><p class="section-copy">No sign-in. No server. Your data stays in this browser.</p></div>
+<div class="tool-grid">
+<article class="card" data-tool="JSON Formatter"><div class="card-top"><span class="tool-number">01</span><h3>JSON Formatter</h3></div><textarea id="jsonInput" placeholder='Paste JSON here, e.g. {"name":"Nova","student":true}'></textarea><div class="actions"><button class="btn small" id="formatJson">Format</button><button class="btn ghost small" id="copyJson">Copy</button></div><pre id="jsonOutput" class="output">Formatted JSON appears here.</pre></article>
+<article class="card" data-tool="Color Lab"><div class="card-top"><span class="tool-number">02</span><h3>Color Lab</h3></div><div class="color-row"><input id="colorInput" type="color" value="#ff334f"><div id="colorPreview"></div></div><div class="value-row"><label>HEX<input id="hexValue" readonly></label><label>RGB<input id="rgbValue" readonly></label></div><button class="btn small" id="copyHex">Copy HEX</button></article>
+<article class="card" data-tool="Unit Converter"><div class="card-top"><span class="tool-number">03</span><h3>Unit Converter</h3></div><input id="unitInput" type="number" placeholder="Enter value"><select id="unitType"><option value="px-rem">PX → REM</option><option value="rem-px">REM → PX</option><option value="kb-mb">KB → MB</option><option value="mb-gb">MB → GB</option></select><div id="unitResult" class="result">Result appears here.</div></article>
+<article class="card" data-tool="Quick Notes"><div class="card-top"><span class="tool-number">04</span><h3>Quick Notes</h3></div><textarea id="notesInput" placeholder="Save a small study note in this browser..."></textarea><div class="actions"><button class="btn small" id="saveNotes">Save locally</button><button class="btn ghost small" id="clearNotes">Clear</button></div><p id="noteStatus" class="status">Nothing saved yet.</p></article>
+<article class="card" data-tool="Base64 Encoder"><div class="card-top"><span class="tool-number">05</span><h3>Base64 Encoder</h3></div><textarea id="base64Input" placeholder="Enter text to encode or decode..."></textarea><div class="actions"><button class="btn small" id="encode64">Encode</button><button class="btn ghost small" id="decode64">Decode</button><button class="btn ghost small" id="copy64">Copy</button></div><pre id="base64Output" class="output">Output appears here.</pre></article>
+<article class="card" data-tool="Timestamp"><div class="card-top"><span class="tool-number">06</span><h3>Timestamp</h3></div><div class="time-panel"><strong id="liveTime">--:--:--</strong><span id="liveDate">Loading...</span></div><div class="actions"><button class="btn small" id="copyTimestamp">Copy Unix</button><button class="btn ghost small" id="copyIso">Copy ISO</button></div></article>
+<article class="card" data-tool="Character Counter"><div class="card-top"><span class="tool-number">07</span><h3>Character Counter</h3></div><textarea id="countInput" placeholder="Type or paste text..."></textarea><div class="counter-grid"><span><b id="charCount">0</b> characters</span><span><b id="wordCount">0</b> words</span><span><b id="lineCount">0</b> lines</span></div></article>
+<article class="card" data-tool="Password Generator"><div class="card-top"><span class="tool-number">08</span><h3>Password Generator</h3></div><div class="password-row"><input id="passwordOutput" readonly placeholder="Generate a password"><button class="btn small" id="generatePassword">Generate</button></div><label class="range-label">Length <b id="lengthValue">16</b><input id="passwordLength" type="range" min="8" max="40" value="16"></label><button class="btn ghost small" id="copyPassword">Copy password</button><p class="status">Generated locally. Nothing is uploaded.</p></article>
+</div></div></section>
 
-    <article class="card">
-      <div class="card-top"><span class="tool-number">02</span><h3>Color Lab</h3></div>
-      <div class="color-row"><input id="colorInput" type="color" value="#ff334f"><div id="colorPreview"></div></div>
-      <div class="value-row"><label>HEX<input id="hexValue" readonly></label><label>RGB<input id="rgbValue" readonly></label></div>
-      <button class="btn small" id="copyHex">Copy HEX</button>
-    </article>
-
-    <article class="card">
-      <div class="card-top"><span class="tool-number">03</span><h3>Unit Converter</h3></div>
-      <input id="unitInput" type="number" placeholder="Enter value">
-      <select id="unitType">
-        <option value="px-rem">PX → REM</option><option value="rem-px">REM → PX</option>
-        <option value="kb-mb">KB → MB</option><option value="mb-gb">MB → GB</option>
-      </select>
-      <div id="unitResult" class="result">Result appears here.</div>
-    </article>
-
-    <article class="card">
-      <div class="card-top"><span class="tool-number">04</span><h3>Quick Notes</h3></div>
-      <textarea id="notesInput" placeholder="Save a small study note in this browser..."></textarea>
-      <div class="actions"><button class="btn small" id="saveNotes">Save locally</button><button class="btn ghost small" id="clearNotes">Clear</button></div>
-      <p id="noteStatus" class="status">Nothing saved yet.</p>
-    </article>
-  </div>
-</div>
-</section>
-
-<section id="resources" class="section resources">
-<div class="container">
-  <div class="section-head"><p class="eyebrow">RESOURCES</p><h2>Keep learning.</h2></div>
-  <div class="resource-grid">
-    <a href="https://docs.github.com/" target="_blank" rel="noopener"><strong>GitHub Docs</strong><span>Git, repositories and collaboration</span></a>
-    <a href="https://developer.mozilla.org/" target="_blank" rel="noopener"><strong>MDN Web Docs</strong><span>Web development reference</span></a>
-    <a href="https://roadmap.sh/" target="_blank" rel="noopener"><strong>roadmap.sh</strong><span>Developer learning roadmaps</span></a>
-    <a href="https://www.postman.com/" target="_blank" rel="noopener"><strong>Postman</strong><span>API testing and development</span></a>
-  </div>
-</div>
-</section>
-
-<section id="about" class="section about">
-<div class="container about-box">
-  <div><p class="eyebrow">ABOUT</p><h2>Simple by design.</h2></div>
-  <p>DevKit Student Hub runs in your browser using plain HTML, CSS and JavaScript. There is no login, server, database or paid service. Host it free with GitHub Pages.</p>
-</div>
-</section>
+<section id="resources" class="section resources"><div class="container"><div class="section-head"><p class="eyebrow">RESOURCES</p><h2>Keep learning.</h2></div><div class="resource-grid">
+<a href="https://docs.github.com/" target="_blank" rel="noopener"><strong>GitHub Docs</strong><span>Git, repositories and collaboration</span></a>
+<a href="https://developer.mozilla.org/" target="_blank" rel="noopener"><strong>MDN Web Docs</strong><span>Web development reference</span></a>
+<a href="https://roadmap.sh/" target="_blank" rel="noopener"><strong>roadmap.sh</strong><span>Developer learning roadmaps</span></a>
+<a href="https://www.postman.com/" target="_blank" rel="noopener"><strong>Postman</strong><span>API testing and development</span></a>
+</div></div></section>
+<section id="about" class="section about"><div class="container about-box"><div><p class="eyebrow">ABOUT</p><h2>Simple by design.</h2></div><p>DevKit Student Hub uses plain HTML, CSS and JavaScript. Tools process data in your browser. No login, server, database or paid service is required.</p></div></section>
 </main>
-
-<footer><div class="container"><strong>DEVKIT STUDENT HUB</strong><span>Built with HTML • CSS • JavaScript</span></div></footer>
-<script src="script.js"></script>
-</body>
-</html>
+<footer><div class="container"><strong>DEVKIT STUDENT HUB</strong><span>Built with HTML • CSS • JavaScript • 100% browser based</span></div></footer>
+<div id="palette" class="palette" aria-hidden="true"><div class="palette-box"><input id="paletteInput" placeholder="Search tools or jump to a section..." autocomplete="off"><div id="paletteResults"></div><small>ESC to close • ↑ ↓ to navigate • ENTER to open</small></div></div>
+<script src="script.js"></script></body></html>
