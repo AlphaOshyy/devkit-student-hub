@@ -45,3 +45,31 @@ $("commandBtn").addEventListener("click",openPalette);palette.addEventListener("
 document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();openPalette()}if(e.key==="Escape")closePalette();if(palette.classList.contains("open")&&(e.key==="ArrowDown"||e.key==="ArrowUp")){e.preventDefault();pItems[pIndex]?.classList.remove("active");pIndex=(pIndex+(e.key==="ArrowDown"?1:-1)+pItems.length)%pItems.length;pItems[pIndex]?.classList.add("active")}if(palette.classList.contains("open")&&e.key==="Enter")pItems[pIndex]?.click()});
 
 $("randomTool").addEventListener("click",()=>{const cards=[...document.querySelectorAll(".card")];cards[Math.floor(Math.random()*cards.length)].scrollIntoView({behavior:"smooth",block:"center"})});
+
+
+/* Advanced local tools */
+const makeUuid=()=>crypto.randomUUID?crypto.randomUUID():([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16));
+function flashCard(id){const el=$(id);el?.classList.add("flash");setTimeout(()=>el?.classList.remove("flash"),520)}
+function safeText(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function renderMarkdown(s){
+ let x=safeText(s);
+ x=x.replace(/^### (.*)$/gm,"<h3>$1</h3>").replace(/^## (.*)$/gm,"<h2>$1</h2>").replace(/^# (.*)$/gm,"<h1>$1</h1>");
+ x=x.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\*(.+?)\*/g,"<em>$1</em>").replace(/\`(.+?)\`/g,"<code>$1</code>");
+ return x.split(/\n\n+/).map(block=>/^<h[1-3]>/.test(block)?block:"<p>"+block.replace(/\n/g,"<br>")+"</p>").join("");
+}
+$("generateUuid").addEventListener("click",()=>{$("uuidOutput").textContent=makeUuid();toast("UUID generated");flashCard("generateUuid")});
+$("copyUuid").addEventListener("click",()=>copy($("uuidOutput").textContent,"UUID copied"));
+$("encodeUrl").addEventListener("click",()=>{$("urlOutput").textContent=encodeURIComponent($("urlInput").value);toast("URL encoded")});
+$("decodeUrl").addEventListener("click",()=>{try{$("urlOutput").textContent=decodeURIComponent($("urlInput").value);toast("URL decoded")}catch(e){$("urlOutput").textContent="Invalid encoded URL.";toast("Invalid URL")}});
+$("copyUrl").addEventListener("click",()=>copy($("urlOutput").textContent,"URL result copied"));
+$("markdownInput").addEventListener("input",()=>{$("markdownOutput").innerHTML=renderMarkdown($("markdownInput").value)||"Preview appears here."});
+$("decodeJwt").addEventListener("click",()=>{
+ try{
+  const parts=$("jwtInput").value.trim().split(".");
+  if(parts.length!==3)throw new Error("A JWT has 3 parts.");
+  const decodePart=p=>JSON.parse(decodeURIComponent(escape(atob(p.replace(/-/g,"+").replace(/_/g,"/")))));
+  const header=decodePart(parts[0]),payload=decodePart(parts[1]);
+  $("jwtOutput").textContent="HEADER\n"+JSON.stringify(header,null,2)+"\n\nPAYLOAD\n"+JSON.stringify(payload,null,2);
+  toast("JWT decoded locally");
+ }catch(e){$("jwtOutput").textContent="Invalid JWT: "+e.message;toast("Invalid JWT")}
+});
